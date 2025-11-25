@@ -1,0 +1,89 @@
+:root {
+  --font-stack: system-ui, Avenir, Inter, Roboto, Helvetica, Arial, sans-serif;
+  --bg: #0f1724; /* deep navy */
+  --surface: #0b1220;
+  --muted: #94a3b8;
+  --text: #e6eef8;
+  --primary: #7c5cff; /* modern indigo */
+  --accent: #42b883; /* green accent for avatars */
+  --danger: #ff7b7b;
+  --dropdown-bg: rgba(10, 12, 18, 0.92);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  font-family: var(--font-stack);
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+  color: var(--text);
+  background-color: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: inherit;
+}
+a:hover {
+  color: color-mix(in srgb, var(--primary) 80%, black);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+}
+
+h1 {
+  font-size: 2.4em;
+  line-height: 1.1;
+  margin: 0;
+}
+
+button {
+  border-radius: 10px;
+  border: 1px solid transparent;
+  padding: 0.5em 0.9em;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+button:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--primary) 50%, transparent);
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.card {
+  background: var(--card-bg);
+  padding: 1.25rem;
+  border-radius: 12px;
+}
+
+#app {
+  /* min-width: 1280px; */
+  width: 100%;
+  margin: 0 auto;
+  /* padding: 2rem; */
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    /* color: #213547; */
+    background-color: #ffffff;
+  }
+}
+
+/* small utility */
+.muted {
+  color: var(--muted);
+}

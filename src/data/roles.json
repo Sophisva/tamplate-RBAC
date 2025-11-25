@@ -1,0 +1,34 @@
+{
+  "roles": [
+    {
+      "id": "admin",
+      "name": "Administrator",
+      "avatar": "https://ui-avatars.com/api/?name=AD&background=646cff&color=fff",
+      "menus": [
+        { "key": "dashboard", "label": "Dashboard" },
+        { "key": "users", "label": "User Management" },
+        { "key": "rolePermission", "label": "Role Permission"},
+        { "key": "reports", "label": "Reports" }
+      ]
+    },
+    {
+      "id": "ess",
+      "name": "ESS",
+      "avatar": "https://ui-avatars.com/api/?name=ES&background=42b883&color=fff",
+      "menus": [
+        { "key": "dashboard", "label": "Dashboard" },
+        { "key": "profile", "label": "My Profile" }
+      ]
+    },
+    {
+      "id": "hr",
+      "name": "HR",
+      "avatar": "https://ui-avatars.com/api/?name=HR&background=ff7b5c&color=fff",
+      "menus": [
+        { "key": "dashboard", "label": "Dashboard" },
+        { "key": "employees", "label": "Employees" },
+        { "key": "recruitment", "label": "Recruitment" }
+      ]
+    }
+  ]
+}
