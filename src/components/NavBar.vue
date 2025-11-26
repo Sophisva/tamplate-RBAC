@@ -1,6 +1,6 @@
 <template>
   <header class="rbac-navbar">
-    <div class="left">
+      <div class="left">
       <button
         class="hamburger"
         @click="$emit('toggle-sidebar')"
@@ -18,7 +18,7 @@
           <rect y="11" width="20" height="2" rx="1" fill="currentColor" />
         </svg>
       </button>
-      <div class="logo">RBAC System</div>
+      <button class="logo" ref="logoBtn" aria-label="Go home"><a href="/home">RBAC System</a></button>
     </div>
 
     <div class="right">
@@ -91,7 +91,7 @@ import { ref, toRefs } from "vue";
   currentRole: { type: Object, required: true },
   userName: { type: String, default: 'Sophisva.ph' },
 });
-const emit = defineEmits(["toggle-sidebar", "change-role", "signout"]);
+const emit = defineEmits(["toggle-sidebar", "change-role", "signout", "go-home"]);
 const open = ref(false);
 
 function selectRole(r) {
@@ -121,6 +121,9 @@ function selectRole(r) {
   color: var(--text);
   letter-spacing: 0.2px;
 }
+.logo{background:transparent;border:0;padding:0;font-size:1rem;cursor:pointer}
+.logo:focus{outline: none}
+.logo:focus-visible{outline: 3px solid color-mix(in srgb,var(--primary) 60%, black);outline-offset:2px}
 .hamburger {
   background: transparent;
   border: 0;

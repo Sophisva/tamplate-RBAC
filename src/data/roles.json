@@ -5,10 +5,13 @@
       "name": "Administrator",
       "avatar": "https://ui-avatars.com/api/?name=AD&background=646cff&color=fff",
       "menus": [
-        { "key": "dashboard", "label": "Dashboard" },
-        { "key": "users", "label": "User Management" },
-        { "key": "rolePermission", "label": "Role Permission"},
-        { "key": "reports", "label": "Reports" }
+        { "key": "dashboard", "label": "Home", "path": "/home" },
+        { "key": "users", "label": "User Management", "path": "/users" },
+        { "key": "rolePermission", "label": "Role Permission", "path": "/rolePermission"},
+        { "key": "reports", "label": "Reports", "path": "/reports" },
+        { "key": "profile", "label": "My Profile", "path": "/profile" },
+        { "key": "employees", "label": "Employees", "path": "/employees" },
+        { "key": "recruitment", "label": "Recruitment", "path": "/recruitment" }
       ]
     },
     {
@@ -16,8 +19,8 @@
       "name": "ESS",
       "avatar": "https://ui-avatars.com/api/?name=ES&background=42b883&color=fff",
       "menus": [
-        { "key": "dashboard", "label": "Dashboard" },
-        { "key": "profile", "label": "My Profile" }
+        { "key": "dashboard", "label": "Home", "path": "/home" },
+        { "key": "profile", "label": "My Profile", "path": "/profile" }
       ]
     },
     {
@@ -25,9 +28,9 @@
       "name": "HR",
       "avatar": "https://ui-avatars.com/api/?name=HR&background=ff7b5c&color=fff",
       "menus": [
-        { "key": "dashboard", "label": "Dashboard" },
-        { "key": "employees", "label": "Employees" },
-        { "key": "recruitment", "label": "Recruitment" }
+        { "key": "dashboard", "label": "Home", "path": "/home" },
+        { "key": "employees", "label": "Employees", "path": "/employees" },
+        { "key": "recruitment", "label": "Recruitment", "path": "/recruitment" }
       ]
     }
   ]

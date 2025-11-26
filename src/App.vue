@@ -1,5 +1,6 @@
 <script setup>
-import { ref, computed, onMounted, onBeforeUnmount } from "vue";
+import { ref, computed, onMounted, onBeforeUnmount, watch } from "vue";
+import { useRouter, useRoute } from 'vue-router'
 import NavBar from "./components/NavBar.vue";
 import Sidebar from "./components/Sidebar.vue";
 import rolesJson from "./data/roles.json";
@@ -10,6 +11,14 @@ const sidebarOpen = ref(true);
 const isMobile = ref(false);
 let setMobile
 const selectedMenu = ref(currentRole.value.menus?.[0]?.key || "dashboard");
+// Try navigating to the route if the current selected menu is a route
+try{
+  const initial = currentRole.value.menus?.[0]
+  if(initial && initial.path) router.replace({ path: initial.path })
+}catch(e){}
+const router = useRouter()
+const route = useRoute()
+const isHomeRoute = computed(()=> route.name === 'Home')
 // placeholder username until auth is wired
 const username = 'Sophisva.ph'
 
@@ -32,6 +41,21 @@ function changeRole(r) {
 }
 function signOut() {
   alert("Signed out (placeholder)");
+}
+function goHome(){
+  // if the current role has a dashboard menu, go there; otherwise choose the first available
+  const roleMenus = currentRole.value.menus || []
+  const hasDashboard = roleMenus.some(m => m.key === 'dashboard')
+  const target = hasDashboard ? 'dashboard' : (roleMenus[0]?.key || '')
+  if(target){
+    selectedMenu.value = target
+    try{ localStorage.setItem('rbac-selected-menu', selectedMenu.value) }catch(e){}
+    if(target === 'dashboard'){
+      try{ const menu = currentRole.value.menus?.find(m => m.key === 'dashboard'); if(menu && menu.path) router.push({ path: menu.path }) }catch(e){}
+    }
+  }
+  // on mobile, close sidebar
+  try{ if(isMobile.value) sidebarOpen.value = false }catch(e){}
 }
 function selectMenu(m) {
   // Before selecting, check the latest persisted role (in case another tab changed it)
@@ -60,6 +84,11 @@ function selectMenu(m) {
     }
   } catch (e) {
     /* ignore storage errors */
+  }
+
+  // navigate to menu path if defined
+  if(m.path){
+    try{ router.push({ path: m.path }) }catch(e){}
   }
 
   // final permission check against currentRole
@@ -104,12 +133,39 @@ onMounted(() => {
   } catch (e) {
     /* ignore localStorage errors */
   }
+  // If URL contains a ?menu= param, try to use it (e.g., from Ctrl+click open new tab)
+  try{
+    const params = new URLSearchParams(window.location.search)
+    const menuParam = params.get('menu')
+    if(menuParam){
+      // allow menuParam to be either path (starts with /) or a key
+      let foundMenu = null
+      if(menuParam.startsWith('/')){
+        foundMenu = (currentRole.value.menus || []).find(m => m.path === menuParam)
+      } else {
+        foundMenu = (currentRole.value.menus || []).find(m => m.key === menuParam)
+      }
+      if(foundMenu){
+        selectedMenu.value = foundMenu.key
+        try{ localStorage.setItem('rbac-selected-menu', selectedMenu.value) }catch(e){}
+        try{ if(foundMenu.path) router.push({ path: foundMenu.path }) }catch(e){}
+      }
+    }
+  }catch(e){/* ignore */}
 });
 
 onBeforeUnmount(() => {
   if (bc) bc && typeof bc.close === "function" ? bc.close() : null;
   try{ if(setMobile) window.removeEventListener('resize', setMobile) }catch(e){}
 });
+
+// sync selected menu when route changes (e.g., user navigates directly to /home)
+watch(()=>route.name, (name)=>{
+  if(name === 'Home'){
+    selectedMenu.value = 'dashboard'
+    try{ localStorage.setItem('rbac-selected-menu', selectedMenu.value) }catch(e){}
+  }
+})
 
 const selectedMenuLabel = computed(() => {
   const menus = currentRole.value.menus || [];
@@ -125,6 +181,7 @@ const selectedMenuLabel = computed(() => {
     <NavBar
       :roles="roles"
       :currentRole="currentRole"
+      @go-home="goHome"
       :userName="username"
       @toggle-sidebar="toggleSidebar"
       @change-role="changeRole"
@@ -143,15 +200,20 @@ const selectedMenuLabel = computed(() => {
       <main class="content">
         <h1>{{ selectedMenuLabel }}</h1>
         <div class="card">
-          <p>
-            You're signed in as <strong>{{ currentRole.name }}</strong> (role
-            id: <code>{{ currentRole.id }}</code
-            >).
-          </p>
-          <p>
-            This is a simple, elegant theme and a responsive layout. Use the
-            role menu to switch roles.
-          </p>
+          <template v-if="isHomeRoute">
+            <router-view />
+          </template>
+          <template v-else>
+            <p>
+              You're signed in as <strong>{{ currentRole.name }}</strong> (role
+              id: <code>{{ currentRole.id }}</code
+              >).
+            </p>
+            <p>
+              This is a simple, elegant theme and a responsive layout. Use the
+              role menu to switch roles.
+            </p>
+          </template>
         </div>
       </main>
     </div>

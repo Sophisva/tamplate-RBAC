@@ -84,7 +84,7 @@ function onSelect(m, e) {
     rgba(124, 92, 255, 0.08),
     rgba(66, 184, 131, 0.02)
   );
-  border-left: 3px solid var(--primary);
+  border-left: 3px solid var(--danger);
   padding-left: 0.65rem;
 }
 .close-mobile {
