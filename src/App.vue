@@ -230,6 +230,13 @@ const selectedMenuLabel = computed(() => {
         @close="sidebarOpen = false"
       />
 
+      <div
+        v-if="!sidebarOpen && !isMobile"
+        class="sidebar-edge-handle"
+        @click="sidebarOpen = true"
+        title="Open sidebar"
+      />
+
       <main class="content">
         <h1>{{ selectedMenuLabel }}</h1>
         <div class="card">
@@ -284,6 +291,25 @@ const selectedMenuLabel = computed(() => {
   .content {
     padding: 0.5rem;
   }
+}
+
+.sidebar-edge-handle {
+  position: fixed;
+  left: 0;
+  top: 20%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 72px;
+  background: rgba(60, 85, 131, 0.75);
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  z-index: 115;
+  cursor: pointer;
+  transition: width 180ms ease, background 180ms ease;
+}
+.sidebar-edge-handle:hover {
+  width: 16px;
+  background: rgba(60, 85, 131, 0.95);
 }
 .overlay{position:fixed;left:0;right:0;bottom:0;top:64px;background:rgba(2,6,23,0.55);z-index:60}
 </style>
