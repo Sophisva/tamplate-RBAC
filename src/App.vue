@@ -296,7 +296,7 @@ const selectedMenuLabel = computed(() => {
 .sidebar-edge-handle {
   position: fixed;
   left: 0;
-  top: 20%;
+  top: 120px;
   transform: translateY(-50%);
   width: 8px;
   height: 72px;

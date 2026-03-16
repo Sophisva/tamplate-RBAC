@@ -2,7 +2,7 @@
   <aside :class="['rbac-sidebar', { open: visible }]">
     <div class="sidebar-inner">
       <div class="sidebar-control">
-        <span class="menu-title">Menu</span>
+        <span class="menu-title" style="color: #003049;">Menu</span>
         <button class="hide-sidebar" @click="$emit('close')" aria-label="Hide sidebar">
           <b>
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
