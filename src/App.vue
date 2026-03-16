@@ -18,7 +18,7 @@ try{
 }catch(e){}
 const router = useRouter()
 const route = useRoute()
-const isHomeRoute = computed(()=> route.name === 'Home')
+const isHomeRoute = computed(()=> route.name)
 // placeholder username until auth is wired
 const username = 'Sophisva.ph'
 
@@ -31,11 +31,29 @@ function toggleSidebar() {
 }
 function changeRole(r) {
   currentRole.value = r;
-  selectedMenu.value = r.menus?.[0]?.key || "";
+
+  // Set default menu to dashboard (home) if available, otherwise first menu item.
+  const defaultMenu =
+    r.menus?.find((m) => m.key === 'dashboard') || r.menus?.[0] || { key: '', path: '/home' };
+
+  selectedMenu.value = defaultMenu.key || 'dashboard';
+
   try {
-    localStorage.setItem("rbac-current-role", r.id);
-    localStorage.setItem("rbac-selected-menu", selectedMenu.value);
+    localStorage.setItem('rbac-current-role', r.id);
+    localStorage.setItem('rbac-selected-menu', selectedMenu.value);
   } catch (e) {}
+
+  // Navigate to selected default menu path to keep URL in sync
+  try {
+    if (defaultMenu.path) {
+      router.push({ path: defaultMenu.path })
+    } else {
+      router.push({ path: '/home' })
+    }
+  } catch (e) {
+    // ignore navigation failures
+  }
+
   // Persist selection to localStorage only. Other tabs will apply this when/if they reload.
   // (No BroadcastChannel post — change will not be applied immediately in other tabs.)
 }
@@ -159,11 +177,26 @@ onBeforeUnmount(() => {
   try{ if(setMobile) window.removeEventListener('resize', setMobile) }catch(e){}
 });
 
-// sync selected menu when route changes (e.g., user navigates directly to /home)
-watch(()=>route.name, (name)=>{
-  if(name === 'Home'){
+// sync selected menu when route changes (e.g., user navigates directly to /home/users/etc)
+watch(() => route.path, (path) => {
+  const menus = currentRole.value.menus || []
+  const found = menus.find((m) => m.path === path)
+
+  if (found) {
+    selectedMenu.value = found.key
+    try {
+      localStorage.setItem('rbac-selected-menu', selectedMenu.value)
+    } catch (e) {}
+    return
+  }
+
+  // fallback for home route and default UI state
+  if (path === '/home' || path === '/') {
     selectedMenu.value = 'dashboard'
-    try{ localStorage.setItem('rbac-selected-menu', selectedMenu.value) }catch(e){}
+    try {
+      localStorage.setItem('rbac-selected-menu', selectedMenu.value)
+    } catch (e) {}
+    return
   }
 })
 

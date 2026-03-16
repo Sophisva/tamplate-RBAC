@@ -107,8 +107,8 @@ function selectRole(r) {
   justify-content: space-between;
   padding: 0.6rem 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  background: #003049; /* transparent; */
-  position: relative;
+  background: #3c5583; /* transparent; */
+  position: relative; 
   z-index: 120; /* above overlay for mobile */
 }
 .rbac-navbar .left {
@@ -164,12 +164,12 @@ function selectRole(r) {
   position: absolute;
   right: 1rem;
   top: 64px;
-  background: var(--dropdown-bg);
+  background: #dbdbdb; /*var(--dropdown-bg); */
   border: 1px solid rgba(255, 255, 255, 0.04);
   padding: 0.4rem;
   border-radius: 10px;
   min-width: 200px;
-  box-shadow: 0 12px 30px rgba(2, 6, 23, 0.6);
+  box-shadow: 0 12px 30px rgba(23, 23, 2, 0.6);
   list-style: none;
   margin: 0;
 }

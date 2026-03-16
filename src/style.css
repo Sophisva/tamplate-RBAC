@@ -1,9 +1,10 @@
 :root {
   --font-stack: system-ui, Avenir, Inter, Roboto, Helvetica, Arial, sans-serif;
-  --bg: #0f1724; /* deep navy */
+  --bg: #f3f3f3; /* deep navy */
   --surface: #0b1220;
   --muted: #94a3b8;
-  --text: #e6eef8;
+  /* --text: #e6eef8; */
+  --text: #080808;
   --primary: #7c5cff; /* modern indigo */
   --accent: #42b883; /* green accent for avatars */
   --danger: #ff7b7b;
@@ -79,7 +80,7 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     /* color: #213547; */
-    background-color: #ffffff;
+    background-color: #c2c2c2;
   }
 }
 

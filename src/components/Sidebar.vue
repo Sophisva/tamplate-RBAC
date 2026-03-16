@@ -41,10 +41,11 @@ function onSelect(m, e) {
 <style scoped>
 .rbac-sidebar {
   width: 220px;
+  height: 90vh; /* Changed to 100vh for full screen height */
   flex: 0 0 220px;
   padding: 1rem;
   border-right: 1px solid rgba(255, 255, 255, 0.04);
-  background: var(--bg); /*transparent;*/
+  background: #b5bbc0; /*var(--bg);*/ /*transparent;*/
 }
 .sidebar-inner {
   position: sticky;
