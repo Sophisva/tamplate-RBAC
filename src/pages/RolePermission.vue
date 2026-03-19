@@ -1,7 +1,5 @@
 <template>
   <div class="rp-page">
-      <!-- <h2 class="page-title">Role Permission</h2> -->
-
       <!-- Filter form -->
       <form class="filter-form" @submit.prevent="applyFilter">
         <div class="form-row">
@@ -32,34 +30,6 @@
           <button type="button" class="btn" @click="resetFilters">Reset</button>
         </div>
       </form>
-
-      <!-- Results -->
-      <!-- <div class="results">
-        <div class="results-head">
-          <strong>Results ({{ filtered.length }})</strong>
-        </div>
-
-        <table class="results-table" v-if="filtered.length">
-          <thead>
-            <tr>
-              <th>Role</th>
-              <th>Menu</th>
-              <th>Permission</th>
-              <th>Last Updated</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(row, idx) in filtered" :key="idx">
-              <td>{{ row.roleName }}</td>
-              <td>{{ row.menuLabel }}</td>
-              <td>{{ row.permission }}</td>
-              <td>{{ row.updated }}</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div v-else class="no-results">No matching permissions found</div>
-      </div> -->
     </div>
   </template>
 

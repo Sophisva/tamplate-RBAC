@@ -31,8 +31,8 @@
         >
           <img class="avatar" :src="currentRole.avatar" alt="avatar" />
           <div class="role-info">
-            <div class="username">{{ props.userName || 'Sophisva.ph' }}</div>
-            <div class="role-label">{{ currentRole.name }}</div>
+            <div class="username" style="color: aliceblue;">{{ props.userName || 'Sophisva.ph' }}</div>
+            <div class="role-label" style="color: aliceblue;">{{ currentRole.name }}</div>
           </div>
           <svg
             class="chev"
@@ -57,7 +57,7 @@
             :key="r.id"
             :class="{ selected: r.id === currentRole.id }"
           >
-            <button class="dropdown-item" @click="selectRole(r)">
+            <button class="dropdown-item" @click="selectRole(r); $event.currentTarget.blur()">
               <span class="label">{{ r.name }}</span>
               <span class="check" v-if="r.id === currentRole.id" aria-hidden>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -105,7 +105,8 @@ function selectRole(r) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.6rem 1rem;
+  padding: 0.35rem 0.75rem;
+  min-height: 44px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   background: #3c5583; /* transparent; */
   position: relative; 
@@ -114,20 +115,21 @@ function selectRole(r) {
 .rbac-navbar .left {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 .logo {
   font-weight: 700;
   color: var(--text);
   letter-spacing: 0.2px;
+  font-size: 0.95rem;
 }
-.logo{background:transparent;border:0;padding:0;font-size:1rem;cursor:pointer}
+.logo{background:transparent;border:0;padding:0.05rem 0;cursor:pointer}
 .logo:focus{outline: none}
 .logo:focus-visible{outline: 3px solid color-mix(in srgb,var(--primary) 60%, black);outline-offset:2px}
 .hamburger {
   background: transparent;
   border: 0;
-  padding: 0.25rem;
+  padding: 0.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -136,22 +138,23 @@ function selectRole(r) {
 .role-btn {
   display: flex;
   align-items: center;
-  width: 200px;
-  gap: 0.6rem;
-  padding: 0.45rem 0.8rem;
+  width: auto;
+  max-width: 200px;
+  gap: 0.45rem;
+  padding: 0.3rem 0.6rem;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.03);
-  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.45);
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.35);
 }
 .role-info{display:flex;flex-direction:column;align-items:flex-start}
-.role-info .username{font-weight:700;color:var(--text);font-size:0.95rem}
-.role-info .role-label{font-weight:600;color:var(--muted);font-size:0.85rem;margin-top:2px}
+.role-info .username{font-weight:700;color:var(--text);font-size:0.84rem}
+.role-info .role-label{font-weight:600;color:var(--muted);font-size:0.74rem;margin-top:1px}
 .avatar {
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.03);
+  border: 1.5px solid rgba(255, 255, 255, 0.03);
   object-fit: cover;
 }
 .role-name {
@@ -159,11 +162,13 @@ function selectRole(r) {
 }
 .chev {
   opacity: 0.9;
+  width: 10px;
+  height: 10px;
 }
 .dropdown {
   position: absolute;
-  right: 1rem;
-  top: 64px;
+  right: 0.75rem;
+  top: 48px;
   background: #dbdbdb; /*var(--dropdown-bg); */
   border: 1px solid rgba(255, 255, 255, 0.04);
   padding: 0.4rem;
@@ -195,16 +200,18 @@ function selectRole(r) {
 .dropdown-item {
   width: 100%;
   text-align: left;
-  padding: 0.6rem 0.7rem;
+  padding: 0.75rem 0.9rem;
   background: transparent;
   border: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 8px;
+  border-radius: 10px;
+  min-width: 220px;
+  gap: 0.5rem;
 }
 .dropdown-item:hover {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.05);
 }
 .dropdown li.selected .dropdown-item {
   background: linear-gradient(

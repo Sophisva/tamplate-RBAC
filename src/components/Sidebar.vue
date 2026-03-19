@@ -55,7 +55,7 @@ function onSelect(m, e) {
   flex: 0 0 auto;
   padding: 1rem;
   border-right: 1px solid rgba(255, 255, 255, 0.04);
-  background: #b5bbc0; /*var(--bg);*/ /*transparent;*/
+  background: #e4e4e4; /*var(--bg);*/ /*transparent;*/
   transition: width 260ms ease, min-width 260ms ease, opacity 260ms ease, padding 260ms ease, border-right 260ms ease;
   overflow: hidden;
   opacity: 1;
